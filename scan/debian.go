@@ -292,6 +292,11 @@ func (o *debian) scanInstalledPackages() (models.Packages, models.Packages, mode
 		}
 	}
 
+	// Remove duplicate
+	for name := range installed {
+		delete(srcPacks, name)
+	}
+
 	updatableNames, err := o.getUpdatablePackNames()
 	if err != nil {
 		return nil, nil, nil, err
